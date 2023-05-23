@@ -18,10 +18,10 @@ class ReviewFactory extends Factory
     {
         return [
             'product_id' => Product::factory(),
-            'user_id' => $this->faker->randomNumber(),
+            'account_id' => mt_rand(4,9),
             'rating' => $this->faker->numberBetween(1, 5),
             'comment' => $this->faker->sentence(),
-            'reviewDate' => $this->faker->dateTimeThisYear(),
+            'review_date' => $this->faker->dateTimeThisYear(),
         ];
     }
 }

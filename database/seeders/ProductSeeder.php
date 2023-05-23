@@ -15,18 +15,22 @@ class ProductSeeder extends Seeder
     public function run()
     {
         Product::factory()
+            ->hasShop()
             ->count(25)
             ->hasReviews(10)
             ->create();
         Product::factory()
+            ->hasShop()
             ->count(100)
             ->hasReviews(5)
             ->create();
         Product::factory()
+            ->hasShop()
             ->count(100)
             ->hasReviews(3)
             ->create();
         Product::factory()
+            ->hasShop()
             ->count(5)
             ->hasReviews(0)
             ->create();

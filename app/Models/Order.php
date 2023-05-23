@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Order extends Model
 {
     use HasFactory;
-    public function reviews()
+    function account()
     {
-        return $this->hasMany(Review::class);
+        return $this->belongsTo(Account::class);
     }
-    public function shop()
+    function shop()
     {
         return $this->belongsTo(Shop::class);
     }

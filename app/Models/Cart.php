@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Review extends Model
+class Cart extends Model
 {
     use HasFactory;
-    public function product()
-    {
-        return $this->belongsTo(Product::class);
-    }
     public function account()
     {
         return $this->belongsTo(Account::class);
+    }
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
     }
 }

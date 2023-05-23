@@ -19,13 +19,13 @@ class ProductFactory extends Factory
         $name = $this->faker->name();
         $description = $this->faker->sentence();
         $images = $this->faker->imageUrl();
-        $storeID = $this->faker->randomNumber();
+        $shopID = mt_rand(1,3);
         $price = $this->faker->randomNumber();
         return [
             'name' => $name,
             'description' => $description,
             'images' => $images,
-            'storeID' => $storeID,
+            'shop_id' => $shopID,
             'price'=>$price,
         ];
     }

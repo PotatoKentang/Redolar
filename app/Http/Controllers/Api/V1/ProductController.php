@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\QueryHandler;
 use App\Http\Resources\V1\ProductResource;
+use App\Http\Resources\V1\ProductCollection;
+
 
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Filters\V1\ProductQuery;
+
 class ProductController extends Controller
 {
     /**
@@ -15,15 +20,20 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    private static $hash = [
+        "includeReviews" => "reviews",
+        "includeShop" => "shop",
+    ];
+
     public function index(Request $request)
     {
         $filter = new ProductQuery();
         $queryItems = $filter->transform($request);//['column','operator','value']
-        if($queryItems)
-        {
-            return Product::where($queryItems)->paginate();
-        }
-        return Product::paginate();
+        $product = Product::where($queryItems);
+        $product = QueryHandler::includeData(self::$hash,$request,$product);
+        $product = $product->paginate()->appends($request->query());
+        return new ProductCollection($product);
     }
 
     /**
@@ -33,7 +43,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -44,7 +54,7 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        //
+
     }
 
     /**
@@ -55,6 +65,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
+        $product = QueryHandler::includeMissing(self::$hash,request(),$product);
         return new ProductResource($product);
     }
 
@@ -66,7 +77,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+
     }
 
     /**
@@ -78,7 +89,7 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        //
+
     }
 
     /**
@@ -89,6 +100,6 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
     }
 }

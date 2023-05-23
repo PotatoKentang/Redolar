@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources\V1;
 
+use App\Models\Review;
+use App\Models\Shop;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductResource extends JsonResource
@@ -19,7 +21,13 @@ class ProductResource extends JsonResource
             'name'=>$this->name,
             'description'=>$this->description,
             'images'=>$this->images,
-            'storeId'=>$this->storeID,
+            'price'=>$this->price,
+            'shop_id' => ShopResource::make($this->whenLoaded('shop', function () {
+                return $this->shop;
+            })),
+            'reviews' => ReviewResource::collection($this->whenLoaded('reviews', function () {
+                return $this->reviews;
+            }))
         ];
     }
 }
