@@ -24,8 +24,10 @@ class Kernel extends ConsoleKernel
      * @return void
      */
     protected $commands = [
-        // Other commands...
         \App\Console\Commands\GenerateControllersCommand::class,
+        \App\Console\Commands\GenerateRequestsCommand::class,
+        \App\Console\Commands\GenerateResourcesCommand::class,
+        \App\Console\Commands\GenerateFilterQuery::class,
     ];
     protected function commands()
     {
