@@ -19,8 +19,9 @@ return new class extends Migration
             $table->string('description');
             $table->string('images');
             $table->integer('price');
-            $table->timestamps();
+            $table->integer('quantity');
             $table->foreignId('shop_id')->constrained('shops')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

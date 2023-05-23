@@ -1,16 +1,16 @@
 <?php
 
 namespace App\Http\Controllers\Api\V1;
+
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\QueryHandler;
 use App\Http\Resources\V1\ProductResource;
 use App\Http\Resources\V1\ProductCollection;
-
+use App\Http\Requests\V1\StoreProductRequest;
+use App\Http\Requests\V1\UpdateProductRequest;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreProductRequest;
-use App\Http\Requests\UpdateProductRequest;
 use App\Filters\V1\ProductQuery;
 
 class ProductController extends Controller
@@ -36,15 +36,6 @@ class ProductController extends Controller
         return new ProductCollection($product);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -54,7 +45,8 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-
+        $product=Product::create($request->all());
+        return ProductResource::make($product);
     }
 
     /**
@@ -65,19 +57,8 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $product = QueryHandler::includeMissing(self::$hash,request(),$product);
-        return new ProductResource($product);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Product $product)
-    {
-
+        $product = QueryHandler::includeMissing(self::$hash, request(), $product);
+        return ProductResource::make($product);
     }
 
     /**
@@ -89,7 +70,8 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-
+        $product->update($request->all());
+        return ProductResource::make($product);
     }
 
     /**

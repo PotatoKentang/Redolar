@@ -2,7 +2,6 @@
 
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
 
 class QueryHandler{
     static public function includeData($hash,$request,$product)
@@ -15,6 +14,7 @@ class QueryHandler{
         }
         return $product->with($include);
     }
+    
     static public function includeMissing($hash,$request,$product)
     {
         $include = [];

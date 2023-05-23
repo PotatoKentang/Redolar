@@ -27,6 +27,7 @@ class ProductFactory extends Factory
             'images' => $images,
             'shop_id' => $shopID,
             'price'=>$price,
+            'quantity'=>mt_rand(1,100),
         ];
     }
 }

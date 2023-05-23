@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Account extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name',
+        'description',
+        'images',
+        'account_id'
+    ];
     public function addresses()
     {
         return $this->hasMany(Address::class);

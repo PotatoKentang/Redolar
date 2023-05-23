@@ -23,10 +23,14 @@ class Kernel extends ConsoleKernel
      *
      * @return void
      */
+    protected $commands = [
+        // Other commands...
+        \App\Console\Commands\GenerateControllersCommand::class,
+    ];
     protected function commands()
     {
         $this->load(__DIR__.'/Commands');
-
         require base_path('routes/console.php');
+
     }
 }

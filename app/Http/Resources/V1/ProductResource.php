@@ -21,13 +21,10 @@ class ProductResource extends JsonResource
             'name'=>$this->name,
             'description'=>$this->description,
             'images'=>$this->images,
+            'quantity'=>$this->quantity,
             'price'=>$this->price,
-            'shop_id' => ShopResource::make($this->whenLoaded('shop', function () {
-                return $this->shop;
-            })),
-            'reviews' => ReviewResource::collection($this->whenLoaded('reviews', function () {
-                return $this->reviews;
-            }))
+            'shop_id' => ShopResource::make($this->whenLoaded('shop')),
+            'reviews' => ReviewResource::collection($this->whenLoaded('reviews'))
         ];
     }
 }
