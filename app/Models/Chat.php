@@ -9,12 +9,7 @@ class Chat extends Model
 {
     use HasFactory;
 
-    function account()
-    {
-        return $this->belongsTo(Account::class);
-    }
-    function shop()
-    {
-        return $this->belongsTo(Shop::class);
+    function messages() {
+        return $this->belongsTo(Message::class);
     }
 }

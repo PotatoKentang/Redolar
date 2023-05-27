@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 
 use App\Models\Review;
-use App\Http\Requests\StoreReviewRequest;
-use App\Http\Requests\UpdateReviewRequest;
+use App\Http\Requests\V1\StoreReviewRequest;
+use App\Http\Requests\V1\UpdateReviewRequest;
 
 class ReviewController extends Controller
 {
@@ -37,7 +37,8 @@ class ReviewController extends Controller
      */
     public function store(StoreReviewRequest $request)
     {
-        //
+        $review = Review::create($request->all());
+        return $review;
     }
 
     /**
@@ -48,7 +49,8 @@ class ReviewController extends Controller
      */
     public function show(Review $review)
     {
-        //
+
+        return $review;
     }
 
     /**
@@ -59,7 +61,7 @@ class ReviewController extends Controller
      */
     public function edit(Review $review)
     {
-        //
+
     }
 
     /**
@@ -71,7 +73,8 @@ class ReviewController extends Controller
      */
     public function update(UpdateReviewRequest $request, Review $review)
     {
-        //
+        $review->update($request->all());
+        return $review;
     }
 
     /**
@@ -82,6 +85,8 @@ class ReviewController extends Controller
      */
     public function destroy(Review $review)
     {
-        //wadwadaw
+
+        $review->delete();
+        return $review;
     }
 }

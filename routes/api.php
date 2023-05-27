@@ -18,7 +18,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(["prefix"=>"V1",'namespace'=>'App\Http\Controllers\Api\V1'],function(){
+
+Route::group(["prefix"=>"V1",'namespace'=>'App\Http\Controllers\Api\V1','middleware' => ['auth:sanctum']],function(){
     // Group: Chat
     Route::resource('chat', ChatController::class);
 
@@ -39,4 +40,12 @@ Route::group(["prefix"=>"V1",'namespace'=>'App\Http\Controllers\Api\V1'],functio
 
     // Group: Account
     Route::resource('account', AccountController::class);
+
+    // Group: Order
+    Route::resource('order', OrderController::class);
+
+    // Group: Messages
+    Route::resource('messages', MessageController::class);
+
+    
 });

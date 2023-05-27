@@ -15,7 +15,7 @@ class AddressController extends Controller
      */
     public function index()
     {
-        //
+        return Address::All();
     }
 
     /**
@@ -25,7 +25,7 @@ class AddressController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -36,7 +36,7 @@ class AddressController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Address::create($request->all());
     }
 
     /**
@@ -47,7 +47,7 @@ class AddressController extends Controller
      */
     public function show(Address $address)
     {
-        //
+        return $address;
     }
 
     /**
@@ -58,7 +58,7 @@ class AddressController extends Controller
      */
     public function edit(Address $address)
     {
-        //
+
     }
 
     /**
@@ -70,7 +70,8 @@ class AddressController extends Controller
      */
     public function update(Request $request, Address $address)
     {
-        //
+        $address->update($request->all());
+        return $address;
     }
 
     /**

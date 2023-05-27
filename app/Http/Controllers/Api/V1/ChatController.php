@@ -15,7 +15,7 @@ class ChatController extends Controller
      */
     public function index()
     {
-        //
+        return Chat::All();
     }
 
     /**
@@ -25,7 +25,7 @@ class ChatController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -36,7 +36,8 @@ class ChatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $chat = Chat::create($request->all());
+        return $chat;
     }
 
     /**
@@ -47,7 +48,7 @@ class ChatController extends Controller
      */
     public function show(Chat $chat)
     {
-        //
+        return $chat;
     }
 
     /**
@@ -70,7 +71,8 @@ class ChatController extends Controller
      */
     public function update(Request $request, Chat $chat)
     {
-        //
+        $chat->update($request->all());
+        return $chat;
     }
 
     /**
@@ -81,6 +83,7 @@ class ChatController extends Controller
      */
     public function destroy(Chat $chat)
     {
-        //
+        $chat->delete();
+        return $chat;
     }
 }

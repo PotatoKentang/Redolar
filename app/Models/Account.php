@@ -4,15 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class Account extends Model
 {
-    use HasFactory;
+    use HasApiTokens, HasFactory, Notifiable;
     protected $fillable = [
         'name',
-        'description',
-        'images',
-        'account_id'
+        'phone',
+        'image',
+        'password',
+        'email',
+    ];
+    protected $hidden = [
+        'password',
+        'remember_token',
     ];
     public function addresses()
     {

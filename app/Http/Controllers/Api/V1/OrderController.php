@@ -15,7 +15,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        return Order::All();
     }
 
     /**
@@ -36,7 +36,8 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $order = Order::create($request->all());
+        return $order;
     }
 
     /**
@@ -47,7 +48,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        return $order;
     }
 
     /**
@@ -70,7 +71,9 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+
+        $order->update($request->all());
+        return $order;
     }
 
     /**
@@ -81,6 +84,8 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+
+        $order->delete();
+        return $order;
     }
 }

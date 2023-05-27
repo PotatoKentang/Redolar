@@ -15,7 +15,7 @@ class AccountController extends Controller
      */
     public function index()
     {
-        
+        return Account::All();
     }
 
     /**
@@ -36,7 +36,8 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $account = Account::create($request->all());
+        return $account;
     }
 
     /**
@@ -47,7 +48,8 @@ class AccountController extends Controller
      */
     public function show(Account $account)
     {
-        //
+
+        return $account;
     }
 
     /**
@@ -70,7 +72,9 @@ class AccountController extends Controller
      */
     public function update(Request $request, Account $account)
     {
-        //
+
+        $account->update($request->all());
+        return $account;
     }
 
     /**
@@ -81,6 +85,8 @@ class AccountController extends Controller
      */
     public function destroy(Account $account)
     {
-        //
+
+        $account->delete();
+        return $account;
     }
 }
