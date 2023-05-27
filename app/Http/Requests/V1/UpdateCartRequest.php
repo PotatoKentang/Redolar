@@ -24,7 +24,9 @@ class UpdateCartRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'account_id'=>'sometimes|required|integer',
+            'product_id'=>'sometimes|required|integer',
+            'quantity'=>'sometimes|required|integer'
         ];
     }
 }

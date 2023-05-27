@@ -16,9 +16,9 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return message::All();
+        return message::with(["id","=",$request->query('id')]);
     }
 
     /**

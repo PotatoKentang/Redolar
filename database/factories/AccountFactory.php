@@ -21,6 +21,7 @@ class AccountFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'phone' => $this->faker->phoneNumber(),
             'password' => Hash::make($this->faker->password()),
+            'image' => $this->faker->imageUrl(),
         ];
     }
 }

@@ -33,7 +33,7 @@ class ProductController extends Controller
         $product = Product::where($queryItems);
         $product = QueryHandler::includeData(self::$hash,$request,$product);
         $product = $product->paginate()->appends($request->query());
-        return new ProductCollection($product);
+        return ProductCollection::make($product);
     }
 
 

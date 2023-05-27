@@ -24,7 +24,11 @@ class UpdateAccountRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name'=>'sometimes|required|string',
+            'phone' => 'sometimes|required|numeric',
+            'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'password' => 'sometimes|required|min:8',
+            'email' => 'sometimes|required|email|unique:accounts,email'
         ];
     }
 }

@@ -1,11 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Laravel\Sanctum\Sanctum;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Account;
+use Illuminate\Support\Facades\Crypt;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,36 +24,10 @@ Route::get('/', function () {
 });
 
 
-// Route::get('/tokens/create', function (Request $request) {
-//     $email = $request->query('email');
-//     $password = $request->query('password');
-//     $name = $request->query('name');
-//     if(!Auth::attempt(['email'=>$email,'password'=>$password]))
-//     {
-//         $user = User::create([
-//             'name' => $name,
-//             'email' => $email,
-//             'password' => Hash::make($password)
-//         ]);
-//         $user->name = $name;
-//         $user->email = $email;
-//         $user->password = Hash::make($password);
-//         $user->save();
-//         if(Auth::attempt(['email' => $email, 'password' => $password])) {
-//             $sellerToken = $user->createToken('seller token',['create','update','delete']);
-//             $buyerToken = $user->createToken('buyer token',['create','update','delete']);
-//             $guestToken = $user->createToken('guest token',['none']);
-//             return [
-//                 'sellerToken' => $sellerToken->plainTextToken,
-//                 'buyerToken' => $buyerToken->plainTextToken,
-//                 'guestToken' => $guestToken->plainTextToken,
-//                 'this user' => Auth::user()
-//             ];
-//         }
-//     }
-// });
 
-Route::get('/login',function(Request $request) {
+//make a example format for the login
+
+Route::get('/login', function (Request $request) {
     $email = $request->query('email');
     $password = $request->query('password');
 
@@ -71,10 +44,42 @@ Route::get('/login',function(Request $request) {
             'sellerToken' => $sellerToken->plainTextToken,
             'buyerToken' => $buyerToken->plainTextToken,
             'guestToken' => $guestToken->plainTextToken,
+            'account' => Crypt::encryptString($account->id)
         ];
     }
     // Invalid credentials
     return ['error' => 'Invalid credentials'];
+});
+
+Route::get('/register',function(Request $request){
+    $name = $request->query('name');
+    $email = $request->query('email');
+    $password = $request->query('password');
+    $phone = $request->query('phone');
+    $image = $request->query('image');
+    $account = Account::create([
+        'name' => $name,
+        'email' => $email,
+        'password' => Hash::make($password),
+        'phone' => $phone,
+        'image' => $image,
+    ]);
+    $account->save();
+    return ['message' => 'Register successful'];
+});
+
+Route::get('/logout', function (Request $request) {
+    // Retrieve the account ID from the encrypted account data
+    $accountId = Crypt::decryptString($request->query('account'));
+
+    // Retrieve the account based on the ID
+    $account = Account::find($accountId);
+
+    // Revoke all tokens for the account
+    $account->tokens()->delete();
+
+    // Logout successful
+    return ['message' => 'Logout successful'];
 });
 
 

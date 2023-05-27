@@ -3,19 +3,28 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\QueryHandler;
+use App\Http\Resources\V1\ShopCollection;
+use App\Http\Resources\V1\ShopResource;
 use App\Models\Shop;
 use Illuminate\Http\Request;
 
 class ShopController extends Controller
 {
+    private static $hash = [
+        "includeProduct" => "products",
+    ];
+    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Shop::All();
+        $shop = Shop::all();
+        $shop = QueryHandler::includeMissing(self::$hash, $request, $shop);
+        return ShopCollection::make($shop);
     }
 
     /**
@@ -48,8 +57,8 @@ class ShopController extends Controller
      */
     public function show(Shop $shop)
     {
-
-        return $shop;
+        $shop = QueryHandler::includeMissing(self::$hash, request(), $shop);
+        return ShopResource::make($shop);
     }
 
     /**

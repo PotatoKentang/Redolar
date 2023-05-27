@@ -4,7 +4,7 @@
 namespace App\Http\Controllers;
 
 class QueryHandler{
-    static public function includeData($hash,$request,$product)
+    static public function includeData($hash,$request,$query)
     {
         $include = [];
         foreach ($hash as $key => $value) {
@@ -12,10 +12,10 @@ class QueryHandler{
                 $include[] = $value;
             }
         }
-        return $product->with($include);
+        return $query->with($include);
     }
-    
-    static public function includeMissing($hash,$request,$product)
+
+    static public function includeMissing($hash,$request,$query)
     {
         $include = [];
         foreach ($hash as $key => $value) {
@@ -23,7 +23,7 @@ class QueryHandler{
                 $include[] = $value;
             }
         }
-        return $product->loadMissing($include);
+        return $query->loadMissing($include);
     }
 
 

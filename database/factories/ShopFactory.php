@@ -20,6 +20,7 @@ class ShopFactory extends Factory
             'name' => $this->faker->name(),
             'description' => $this->faker->text(),
             'images' => $this->faker->imageUrl(),
+            'account_id' => mt_rand(1,10),
         ];
     }
 }

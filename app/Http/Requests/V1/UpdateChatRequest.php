@@ -24,7 +24,9 @@ class UpdateChatRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'sender_id' => 'required|integer',
+            'receiver_id' => 'required|integer',
+            'message' => 'required|string'
         ];
     }
 }

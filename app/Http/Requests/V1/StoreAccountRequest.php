@@ -24,7 +24,11 @@ class StoreAccountRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name'=>'required | string',
+            'phone' => 'required|numeric',
+            'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'password' => 'required|min:8',
+            'email' => 'required|email|unique:accounts,email'
         ];
     }
 }

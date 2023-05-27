@@ -18,9 +18,12 @@ return new class extends Migration
             $table->unsignedBigInteger('account_id');
             $table->string('street');
             $table->string('city');
+            $table->string('state');
             $table->string('country');
-            $table->timestamps();
+            $table->string('zip_code');
             $table->foreign('account_id')->references('id')->on('accounts')->onDelete('cascade');
+            $table->timestamps();
+
         });
     }
 

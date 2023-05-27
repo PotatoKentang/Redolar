@@ -24,7 +24,11 @@ class UpdateAddressRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'street'=>'sometimes|required|string',
+            'city'=>'sometimes|required|string',
+            'state'=>'sometimes|required|string',
+            'country'=>'sometimes|required|string',
+            'zip_code'=>'sometimes|required|string'
         ];
     }
 }

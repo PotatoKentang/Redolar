@@ -24,7 +24,12 @@ class StoreOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'account_id' => 'required|integer',
+            'address_id' => 'required|integer',
+            'product_id' => 'required|integer',
+            'quantity' => 'required|integer',
+            'total' => 'required|numeric',
+            'status' => 'required|string'
         ];
     }
 }

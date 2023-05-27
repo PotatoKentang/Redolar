@@ -12,4 +12,8 @@ class Shop extends Model
     {
         return $this->belongsTo(Account::class);
     }
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

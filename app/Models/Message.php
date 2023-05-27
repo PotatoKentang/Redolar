@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Message extends Model
 {
     use HasFactory;
+    function chat()
+    {
+        return $this->hasMany(Chat::class);
+    }
     function account()
     {
         return $this->belongsTo(Account::class);
